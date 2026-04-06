@@ -123,6 +123,12 @@ def linear_baseline(X_trainval, y_trainval, X_test, y_test):
 
 # 7. 실행 및 시각화
 if __name__ == "__main__":
+    # 데이터 로딩 및 분할
+    data = np.load(find_data_file())
+    X = data["X"]
+    y = data["y"]
+    X_trainval, X_test, y_trainval, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
     # 3-hidden-layer CV
     tr_losses, va_losses = cross_validate(X_trainval, y_trainval, [32, 16, 8])
     mean_tr, mean_va = tr_losses.mean(0), va_losses.mean(0)
